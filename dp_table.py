@@ -19,7 +19,7 @@ class DPTable(object):
             self.table[0][row].value = 0
 
         for col in range(len(self.table)):
-            self.table[row][0].value = 0
+            self.table[col][0].value = 0
 
     # Funct to traverse the matrix, and assign values to each cell
     def fill_matrix(self):
