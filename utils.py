@@ -13,6 +13,29 @@ def read_sequence(file_path):
     return sequence
 
 
+def print_alignment(seq_1, seq_2):
+    alignment = ''
+    for i in range(len(seq_1)):
+        if seq_1[i] == seq_2[i] and seq_1[i] not in ' -*':
+            alignment += '|'
+        elif seq_1[i] not in ' -*' and seq_2[i] not in ' -*':
+            alignment += '*'
+        else:
+            alignment += ' '
+
+    # Now print things 80 chars wide
+    full_lines = int(len(seq_1)/80)
+    for i in range(full_lines):
+        print(seq_1[i * 80:(i + 1) * 80])
+        print(alignment[i * 80:(i + 1) * 80])
+        print(seq_2[i * 80:(i + 1) * 80])
+        print('\n')
+
+    print(seq_1[full_lines * 80:])
+    print(alignment[full_lines * 80:])
+    print(seq_2[full_lines * 80:])
+
+
 # BLOSUM62 Matrix:
 blosum_matrix = [[None , 'A', 'R', 'N', 'D', 'C', 'Q', 'E', 'G', 'H', 'I', 'L', 'K', 'M', 'F', 'P', 'S', 'T', 'W', 'Y', 'V', 'B', 'Z', 'X', '*'],
     ['A', 4, -1, -2, -2, 0, -1, -1, 0, -2, -1, -1, -1, -1, -2, -1, 1, 0, -3, -2, 0, -2, -1, 0, -4],
