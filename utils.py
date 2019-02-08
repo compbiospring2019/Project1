@@ -36,6 +36,14 @@ def print_alignment(seq_1, seq_2):
     print(seq_2[full_lines * 80:])
 
 
+def print_table(table, print_prev=False):
+    for row in table:
+        line = ''
+        for cell in row:
+            line += str(cell) + ', '
+        print(line[:-2])
+
+
 # BLOSUM62 Matrix:
 blosum_matrix = [[None , 'A', 'R', 'N', 'D', 'C', 'Q', 'E', 'G', 'H', 'I', 'L', 'K', 'M', 'F', 'P', 'S', 'T', 'W', 'Y', 'V', 'B', 'Z', 'X', '*'],
     ['A', 4, -1, -2, -2, 0, -1, -1, 0, -2, -1, -1, -1, -1, -2, -1, 1, 0, -3, -2, 0, -2, -1, 0, -4],
