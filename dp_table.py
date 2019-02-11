@@ -34,8 +34,26 @@ class DPTable(object):
         # Overwrite this one
         # Calculate value of cell here, based on the values & alignment of the cells around it
         # Note: char # in string is 1 less than row/col num
-        value = 0
-        prev_cell = (0, 0)
+        current = self.table[row][col]
+        above = self.table[row - 1][col]
+        left = self.table[row][col - 1]
+        diagonal = self.table[row - 1][col - 1]
+        
+        if (above.value > left.value) and (above.value > diagonal.value): 
+            prev_cell = above
+            value = above.value - 1
+        elif (left.value > diagonal.value) and (left.value > above.values):
+            prev_cell = left
+            value = left.value - 1
+        else: 
+            prev_cell = diagonal
+            letter1 = self.seq_1[row - 1]
+            letter2 = self.seq_2[col - 1]
+            if letter1 == letter2:
+                value = diagonal + 1
+            else:
+                value = diagonal - 1
+        
         return value, prev_cell
 
     # Funct to return the path through the graph
