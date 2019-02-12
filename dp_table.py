@@ -15,11 +15,18 @@ class DPTable(object):
 
     # Funct to assign initial values to base cases
     def base_cases(self):
+        
         for row in range(len(self.table[0])):
-            self.table[0][row].value = 0
-
+            if row == 0:
+                self.table[0][row].value = 0 
+            else: 
+                self.table[0][row].value = self.table[0][row - 1] - 1
+        
         for col in range(len(self.table)):
-            self.table[col][0].value = 0
+            if col == 0:
+                self.table[col][0].value = 0
+            else:
+                self.table[col][0].value = self.table[col - 1][0].value - 1 
 
     # Funct to traverse the matrix, and assign values to each cell
     def fill_matrix(self):
@@ -60,7 +67,51 @@ class DPTable(object):
     def backtrack(self):
         # Overwrite this one, too
         # Should return the path through the graph (via the sequence)
-        pass
+        aligned1 = ""
+        aligned2 = ""
+        n = len(self.seq_1)
+        m = len(self.seq_2)
+        end = self.table[m][n]
+        current = end
+        while (n > 0 && m > 0):
+            prev = current.prev 
+            if (prev == self.table[m - 1][n - 1]):
+                letter1 = self.seq_1[m - 1]
+                letter2 = self.seq_2[n - 1]
+                aligned1 += self.seq_1[m - 1]
+                aligned2 += self.seq_2[n - 1]
+
+                n = n - 1 
+                m = m - 1
+
+            elif (prev == self.table[m - 1][n]):
+                aligned1 += self.seq_1[m - 1]
+                aligned2 += '-'
+                m = m - 1
+            elif (prev == self.table[m][n - 1]):
+                aligned1 += '-'
+                aligned2 += self.seq_2[n - 1]
+                n = n - 1
+            current = prev
+        while m > 0:
+            aligned1 += self.seq_1[m - 1]
+            aligned2 += '-'
+            m = m - 1
+        while n > 0:
+            aligned1 += '-'
+            aligned2 += self.seq_2[n - 1]
+            n = n - 1
+        aligned1 = aligned1[::-1]
+        aligned2 = aligned2[::-1]
+
+    return(aligned1, aligned2)
+
+
+
+
+
+
+        
 
 
 class Cell(object):
