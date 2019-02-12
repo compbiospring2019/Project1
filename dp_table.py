@@ -73,7 +73,7 @@ class DPTable(object):
         m = len(self.seq_2)
         end = self.table[m][n]
         current = end
-        while (n > 0 && m > 0):
+        while (n > 0 and m > 0):
             prev = current.prev 
             if (prev == self.table[m - 1][n - 1]):
                 letter1 = self.seq_1[m - 1]
