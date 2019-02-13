@@ -13,6 +13,13 @@ class DPTable(object):
     def build_table(self):
         self.table = [[Cell() for i in range(len(self.seq_1) + 1)] for j in range(len(self.seq_2) + 1)]
 
+    def sw_base_cases(self): 
+        for row in range(len(self.table[0])):
+            self.table[0][row].value = 0
+        for col in range(len(self.table)):
+            self.table[col][0].value = 0
+
+
     # Funct to assign initial values to base cases
     def base_cases(self):
         
@@ -33,6 +40,20 @@ class DPTable(object):
         for row in range(1, len(self.table)):
             for col in range(1, len(self.table[0])):
                 val, prev = self.calc_value(row, col)
+                self.table[row][col].value = val
+                self.table[row][col].previous = prev
+    def sw_fill_matrix(self):
+        max_value = 0
+        max_position = self.table[0][0]
+        for row in range(1, len(self.table)):
+            for col in range(1, len(self.table[0])):
+                val, prev = self.calc_value(row, col)
+                if val < 0: 
+                    val = 0
+                if max_value <= val:
+                    max_value = val
+                    max_position = self.table[row][col]
+                    
                 self.table[row][col].value = val
                 self.table[row][col].previous = prev
 
@@ -64,7 +85,7 @@ class DPTable(object):
         return value, prev_cell
 
     # Funct to return the path through the graph
-    def backtrack(self):
+    def backtrack(self, m, n):
         # Overwrite this one, too
         # Should return the path through the graph (via the sequence)
         aligned1 = ""
@@ -76,11 +97,8 @@ class DPTable(object):
         while (n > 0 and m > 0):
             prev = current.prev 
             if (prev == self.table[m - 1][n - 1]):
-                letter1 = self.seq_1[m - 1]
-                letter2 = self.seq_2[n - 1]
                 aligned1 += self.seq_1[m - 1]
                 aligned2 += self.seq_2[n - 1]
-
                 n = n - 1 
                 m = m - 1
 
@@ -104,7 +122,7 @@ class DPTable(object):
         aligned1 = aligned1[::-1]
         aligned2 = aligned2[::-1]
 
-    return(aligned1, aligned2)
+        return(aligned1, aligned2)
 
 
 
