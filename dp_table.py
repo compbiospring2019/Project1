@@ -76,7 +76,7 @@ class DPTable(object):
         self.table[0][0].previous = None
         n = len(self.seq_1)
         m = len(self.seq_2)
-        current = self.table[m][n]
+        current = self.table[n][m]
         
         while current.previous is not None:
             self.aligned1 += current.char1
