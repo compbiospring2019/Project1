@@ -7,42 +7,45 @@ class SmithWaterman(dp_table.DPTable):
 
     def calculate_alignment(self):
         self.build_table()
-        self.sw_base_cases()
-        self.sw_fill_matrix()
+        self.base_cases()
+        self.fill_matrix()
         self.backtrack()
 
     def base_cases(self):
         for row in range(len(self.table[0])):
-            self.table[0][row].value = 0
+            self.table[row][0].value = 0
         for col in range(len(self.table)):
-            self.table[col][0].value = 0
+            self.table[0][col].value = 0
 
     def calc_value(self, row, col):
         # Calc value and previous cell
+        seq_1_char = self.seq_1[row - 1]
+        seq_2_char = self.seq_2[col - 1]
 
         # Calc val of above, left, and diagonal
-        above_val = self.table[row - 1][col] + utils.blosum62[]
         # (based on cell vals, and blosum matrix)
+        above_val = self.table[row - 1][col].value + utils.blosum62['*', seq_2_char]
+        left_val = self.table[row][col - 1].value + utils.blosum62[seq_1_char, '*']
+        diagonal_val = self.table[row - 1][col - 1].value + utils.blosum62[seq_1_char, seq_2_char]
+
         # Choose max
+        max_value = max(above_val, left_val, diagonal_val)
+        if max_value == diagonal_val:
+            previous = (row - 1, col - 1)
+        elif max_value == above_val:
+            previous = (row - 1, col)
+        else:
+            previous = (row, col - 1)
+
         # if max is less than zero, set val to zero
+        if max_value < 0:
+            max_value = 0
+
+        # TODO: Keep track of max val in the table
+
         # return val, prev
+        return max_value, previous
 
+    def backtrack(self):
+        # TODO: Backtracking methods
         pass
-
-'''
-    def fill_matrix(self):
-        max_value = 0
-        max_position = self.table[0][0]
-        for row in range(1, len(self.table)):
-            for col in range(1, len(self.table[0])):
-                val, prev = self.calc_value(row, col)
-                if val < 0:
-                    val = 0
-                if max_value <= val:
-                    max_value = val
-                    max_position = self.table[row][col]
-
-                current = self.table[row][col]
-                current.value = val
-                current.previous = prev
-'''
