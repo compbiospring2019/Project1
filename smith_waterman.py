@@ -12,9 +12,9 @@ class SmithWaterman(dp_table.DPTable):
         self.backtrack()
 
     def base_cases(self):
-        for row in range(len(self.table[0])):
+        for row in range(len(self.table)):
             self.table[row][0].value = 0
-        for col in range(len(self.table)):
+        for col in range(len(self.table[0])):
             self.table[0][col].value = 0
 
     def calc_value(self, row, col):
@@ -41,11 +41,14 @@ class SmithWaterman(dp_table.DPTable):
         if max_value < 0:
             max_value = 0
 
-        # TODO: Keep track of max val in the table
+        # Keep track of max val in the whole table
+        if self.table[self.max_position[0]][self.max_position[1]].value < max_value:
+            self.max_position = (row, col)
 
         # return val, prev
         return max_value, previous
 
     def backtrack(self):
-        # TODO: Backtracking methods
+        print('Max position: {}'.format(self.max_position))
+        print('Max value: {}'.format(self.table[self.max_position[0]][self.max_position[1]].value))
         pass
