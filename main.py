@@ -29,6 +29,7 @@ def main():
     seq_1, seq_2 = parse_args()
 
     # Calculate and display Needleman-Wunsch
+    print('Needleman-Wunsch alignment:\n')
     nw_table = dp_table.DPTable(seq_1, seq_2)
     nw_table.calculate_alignment()
     # utils.print_table(nw_table.table)
@@ -37,6 +38,7 @@ def main():
     utils.print_alignment(nw_table.aligned1, nw_table.aligned2)
 
     # Calculate and display Smith-Waterman
+    print('\n\nSmith-Waterman alignment:\n')
     sw_table = smith_waterman.SmithWaterman(seq_1, seq_2)
     sw_table.calculate_alignment()
     # utils.print_table(sw_table.table)
