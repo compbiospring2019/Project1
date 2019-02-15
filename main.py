@@ -1,4 +1,5 @@
 import dp_table
+import smith_waterman
 import utils
 import sys
 
@@ -27,12 +28,20 @@ def parse_args():
 def main():
     seq_1, seq_2 = parse_args()
 
-    table = dp_table.DPTable(seq_1, seq_2)
-    table.calculate_alignment()
-    utils.print_table(table.table)
-    
-    print ("score:", table.score)
-    utils.print_alignment(table.aligned1, table.aligned2)
+    # Calculate and display Needleman-Wunsch
+    nw_table = dp_table.DPTable(seq_1, seq_2)
+    nw_table.calculate_alignment()
+    # utils.print_table(nw_table.table)
+
+    print ('score: {}'.format(nw_table.score))
+    utils.print_alignment(nw_table.aligned1, nw_table.aligned2)
+
+    sw_table = smith_waterman.SmithWaterman(seq_1, seq_2)
+    sw_table.calculate_alignment()
+    # utils.print_table(sw_table.table)
+
+    print ('score: {}'.format(sw_table.score))
+    utils.print_alignment(sw_table.aligned1, sw_table.aligned2)
 
 
 if __name__ == "__main__":
