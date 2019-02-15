@@ -23,19 +23,17 @@ class DPTable(object):
     # Funct to assign initial values to base cases
     def base_cases(self):
         
-        for row in range(len(self.table[0])):
-            self.table[0][row].value = row * -1
-            self.table[0][row].previous = self.table[0][row - 1]
-            self.table[0][row].char1 = '-'
-            self.table[0][row].char2 = self.seq_1[0]
-            
+        for row in range(1, len(self.table)):
+            self.table[row][0].value = self.table[row - 1][0].value - 4
+            self.table[row][0].previous = self.table[row - 1][0]
+            self.table[row][0].char1 = self.seq_1[row - 1]
+            self.table[row][0].char2 = '-'
 
-        for col in range(len(self.table)):
-            cols = self.table[col][0]
-            cols.value = col * -1
-            cols.previous = self.table[col - 1][0]
-            cols.char1 = self.seq_2[0]
-            cols.char2 = '-'
+        for col in range(1, len(self.table[0])):
+            self.table[0][col].value = self.table[0][col - 1].value - 4
+            self.table[0][col].previous = self.table[0][col - 1]
+            self.table[0][col].char1 = '-'
+            self.table[0][col].char2 = self.seq_2[col - 1]
 
     # Funct to traverse the matrix, and assign values to each cell
     def fill_matrix(self):
