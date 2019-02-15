@@ -9,4 +9,21 @@ def test_base_cases():
     test_table.base_cases()
     utils.print_table(test_table.table)
 
-test_base_cases()
+def test_calc_value():
+    test_table = dp_table.DPTable("GCCCT", "GCGCA")
+    test_table.build_table()
+    test_table.base_cases()
+    test_table.fill_matrix()
+    utils.print_table(test_table.table)
+
+def test_backtrack():
+    test_table = dp_table.DPTable("GCCCT", "GCGCA")
+    test_table.build_table()
+    test_table.base_cases()
+    test_table.fill_matrix()
+    utils.print_table(test_table.table)
+    test_table.backtrack()
+    print(test_table.aligned1)
+    print(test_table.aligned2)
+
+test_backtrack()
