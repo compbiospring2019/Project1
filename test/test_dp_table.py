@@ -32,6 +32,7 @@ def test_score():
     test_table.base_cases()
     test_table.fill_matrix()
     test_table.get_score()
+    utils.print_table(test_table.table)
     print(test_table.score)
 
 test_score()

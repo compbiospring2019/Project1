@@ -51,22 +51,25 @@ class DPTable(object):
         above = self.table[row - 1][col]
         left = self.table[row][col - 1]
         diagonal = self.table[row - 1][col - 1]
+        above_scored = above.value + utils.blosum62[self.seq_1[row - 1], '*']
+        left_scored = left.value + utils.blosum62['*', self.seq_2[col - 1]]
+        diagonal_scored = diagonal.value + utils.blosum62[self.seq_1[row - 1], self.seq_2[col - 1]]
         
-        if (above.value > left.value) and (above.value > diagonal.value): 
+        if (above_scored > left.value) and (above_scored > diagonal.value): 
             prev_cell = above
             current.char1 = self.seq_1[row - 1]
             current.char2 = '-'
-            value = above.value + utils.blosum62[current.char1, '*']
-        elif (left.value > diagonal.value) and (left.value > above.value):
+            value = above_scored
+        elif (left_scored > diagonal.value) and (left_scored > above_scored):
             prev_cell = left
             current.char1 = '-'
             current.char2 = self.seq_2[col - 1]
-            value = left.value + utils.blosum62['*', current.char2]
+            value = left_scored
         else: 
             prev_cell = diagonal
             current.char1 = self.seq_1[row - 1]
             current.char2 = self.seq_2[col - 1]
-            value = diagonal.value + utils.blosum62[current.char1, current.char2]
+            value = diagonal_scored
         
         return value, prev_cell
 
