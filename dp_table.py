@@ -54,18 +54,18 @@ class DPTable(object):
         
         if (above.value > left.value) and (above.value > diagonal.value): 
             prev_cell = above
-            current.char1 = self.seq_1[col - 1]
+            current.char1 = self.seq_1[row - 1]
             current.char2 = '-'
             value = above.value + utils.blosum62[current.char1, '*']
         elif (left.value > diagonal.value) and (left.value > above.value):
             prev_cell = left
             current.char1 = '-'
-            current.char2 = self.seq_2[row - 1]
+            current.char2 = self.seq_2[col - 1]
             value = left.value + utils.blosum62['*', current.char2]
         else: 
             prev_cell = diagonal
-            current.char1 = self.seq_1[col - 1]
-            current.char2 = self.seq_2[row - 1]
+            current.char1 = self.seq_1[row - 1]
+            current.char2 = self.seq_2[col - 1]
             value = diagonal.value + utils.blosum62[current.char1, current.char2]
         
         return value, prev_cell
