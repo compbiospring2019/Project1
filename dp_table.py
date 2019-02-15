@@ -18,7 +18,7 @@ class DPTable(object):
 
     # Funct to build the matrix
     def build_table(self):
-        self.table = [[Cell() for i in range(len(self.seq_1) + 1)] for j in range(len(self.seq_2) + 1)]
+        self.table = [[Cell() for i in range(len(self.seq_2) + 1)] for j in range(len(self.seq_1) + 1)]
 
     # Funct to assign initial values to base cases
     def base_cases(self):
@@ -29,7 +29,7 @@ class DPTable(object):
             self.table[0][row].char1 = '-'
             self.table[0][row].char2 = self.seq_1[0]
             
-        
+
         for col in range(len(self.table)):
             cols = self.table[col][0]
             cols.value = col * -1
