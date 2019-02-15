@@ -5,11 +5,9 @@ import dp_table
 class SmithWaterman(dp_table.DPTable):
     max_position = (0, 0)
 
-    def calculate_alignment(self):
-        self.build_table()
-        self.base_cases()
-        self.fill_matrix()
-        self.backtrack()
+    def get_score(self):
+        # Save the max score (for printing purposes)
+        self.score = self.get_cell(self.max_position).value
 
     def base_cases(self):
         for row in range(len(self.table)):
@@ -49,9 +47,6 @@ class SmithWaterman(dp_table.DPTable):
         return max_value, previous
 
     def backtrack(self):
-        # Save the max score (for printing purposes)
-        self.score = self.get_cell(self.max_position).value
-
         current_position = self.max_position
         current_cell = self.get_cell(current_position)
         alignment_1 = list()
