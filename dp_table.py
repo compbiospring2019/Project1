@@ -15,6 +15,7 @@ class DPTable(object):
         self.base_cases()
         self.fill_matrix()
         self.backtrack()
+        self.get_score()
 
     # Funct to build the matrix
     def build_table(self):
