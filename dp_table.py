@@ -1,14 +1,14 @@
 import utils
 
+
 class DPTable(object):
     def __init__(self, s1, s2):
-        self.seq_1 = s1
-        self.seq_2 = s2
+        self.seq_1 = s1.upper()
+        self.seq_2 = s2.upper()
         self.table = []
         self.aligned1 = ''
         self.aligned2 = ''
         self.score = 0
-
 
     def calculate_alignment(self):
         self.build_table()
@@ -80,15 +80,11 @@ class DPTable(object):
         # Overwrite this one, too
         # Should return the path through the graph (via the sequence)
         self.table[0][0].previous = None
-        score = 0
-        aligned1 = ""
-        aligned2 = ""
         n = len(self.seq_1)
         m = len(self.seq_2)
         current = self.table[m][n]
-        i = 0
         
-        while (current.previous is not None):
+        while current.previous is not None:
             
             self.score += current.value
             self.aligned1 += current.char1
@@ -100,46 +96,9 @@ class DPTable(object):
             
             #print(current.previous)
             current = current.previous
-           
 
         self.aligned1 = self.aligned1[::-1]
         self.aligned2 = self.aligned2[::-1]
-        '''
-        while (n > 0 and m > 0):
-            prev = current.previous
-            if (prev == self.table[m - 1][n - 1]):
-                self.aligned1 += self.seq_1[m - 1]
-                self.aligned2 += self.seq_2[n - 1]
-                n = n - 1
-                m = m - 1
-
-            elif (prev == self.table[m - 1][n]):
-                self.aligned1 += self.seq_1[m - 1]
-                self.aligned2 += '-'
-                m = m - 1
-            elif (prev == self.table[m][n - 1]):
-                self.aligned1 += '-'
-                self.aligned2 += self.seq_2[n - 1]
-                n = n - 1
-                current = prev
-        while m > 0:
-            self.aligned1 += self.seq_1[m - 1]
-            self.aligned2 += '-'
-            m = m - 1
-            current = prev
-        while n > 0:
-            self.aligned1 += '-'
-            self.aligned2 += self.seq_2[n - 1]
-            n = n - 1
-            current = prev
-        '''
-
-
-
-
-
-
-        
 
 
 class Cell(object):

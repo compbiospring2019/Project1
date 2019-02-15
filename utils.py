@@ -10,7 +10,7 @@ def read_sequence(file_path):
             sequence += line.strip()
 
     print('Read sequence {}'.format(title))
-    return sequence
+    return sequence.upper()
 
 
 def print_alignment(seq_1, seq_2):
@@ -29,7 +29,7 @@ def print_alignment(seq_1, seq_2):
         print(seq_1[i * 80:(i + 1) * 80])
         print(alignment[i * 80:(i + 1) * 80])
         print(seq_2[i * 80:(i + 1) * 80])
-        print('\n')
+        print('')
 
     print(seq_1[full_lines * 80:])
     print(alignment[full_lines * 80:])
