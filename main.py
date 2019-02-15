@@ -2,16 +2,24 @@ import dp_table
 import utils
 import sys
 
+err_msg = '''
+Please enter two file names (absolute paths)
+of sequences for sequence alignment
+with double quotes around them (if they have spaces)'''
+
 
 def parse_args():
     if len(sys.argv) < 3:
-        print('Please enter two file names (absolute paths)\n'
-              'of sequences for sequence alignment\n'
-              'with double quotes around them (if they have spaces)')
+        print(err_msg)
         sys.exit()
 
-    sequence_1 = utils.read_sequence(sys.argv[1])
-    sequence_2 = utils.read_sequence(sys.argv[2])
+    try:
+        sequence_1 = utils.read_sequence(sys.argv[1])
+        sequence_2 = utils.read_sequence(sys.argv[2])
+    except:
+        # File parsing has failed. Oops.
+        print(err_msg)
+        sys.exit()
 
     return sequence_1, sequence_2
 
