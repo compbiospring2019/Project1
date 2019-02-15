@@ -49,6 +49,37 @@ class SmithWaterman(dp_table.DPTable):
         return max_value, previous
 
     def backtrack(self):
-        print('Max position: {}'.format(self.max_position))
-        print('Max value: {}'.format(self.table[self.max_position[0]][self.max_position[1]].value))
-        pass
+        # Save the max score (for printing purposes)
+        self.score = self.get_cell(self.max_position).value
+
+        current_position = self.max_position
+        current_cell = self.get_cell(current_position)
+        alignment_1 = list()
+        alignment_2 = list()
+
+        while current_cell.value > 0:
+            if not current_cell.previous:
+                print('Something has gone terribly wrong.')
+
+            if current_position[0] == current_cell.previous[0]:
+                # Previous cell was to the left
+                alignment_1.insert(0, '-')
+                alignment_2.insert(0, self.seq_2[current_position[1] - 1])
+            elif current_position[1] == current_cell.previous[1]:
+                # Previous cell was above
+                alignment_1.insert(0, self.seq_1[current_position[0] - 1])
+                alignment_2.insert(0, '-')
+            else:
+                # Previous cell was diagonal
+                alignment_1.insert(0, self.seq_1[current_position[0] - 1])
+                alignment_2.insert(0, self.seq_2[current_position[1] - 1])
+
+            current_position = current_cell.previous
+            current_cell = self.get_cell(current_position)
+
+        self.alignment_1 = ''.join(alignment_1)
+        self.alignment_2 = ''.join(alignment_2)
+
+
+    def get_cell(self, position_tuple):
+        return self.table[position_tuple[0]][position_tuple[1]]
