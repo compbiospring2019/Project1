@@ -9,14 +9,19 @@ def read_sequence(file_path):
         for line in f:
             sequence += line.strip()
 
-    print('Read sequence {}'.format(title))
     return sequence.upper()
 
 
 def print_alignment(seq_1, seq_2):
     alignment = ''
     for i in range(len(seq_1)):
-        if seq_1[i] == seq_2[i] and seq_1[i] not in ' -*':
+        char_1 = seq_1[i]
+        char_2 = seq_2[i]
+        if char_1 == '-':
+            char_1 = '*'
+        if char_2 == '-':
+            char_2 = '*'
+        if blosum62[char_1, char_2] > 0 and seq_1[i] not in ' -*':
             alignment += '|'
         elif seq_1[i] not in ' -*' and seq_2[i] not in ' -*':
             alignment += '*'
