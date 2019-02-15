@@ -80,6 +80,5 @@ class SmithWaterman(dp_table.DPTable):
         self.alignment_1 = ''.join(alignment_1)
         self.alignment_2 = ''.join(alignment_2)
 
-
     def get_cell(self, position_tuple):
         return self.table[position_tuple[0]][position_tuple[1]]
