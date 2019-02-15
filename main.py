@@ -36,12 +36,14 @@ def main():
     print ('score: {}'.format(nw_table.score))
     utils.print_alignment(nw_table.aligned1, nw_table.aligned2)
 
+    # Calculate and display Smith-Waterman
     sw_table = smith_waterman.SmithWaterman(seq_1, seq_2)
     sw_table.calculate_alignment()
     # utils.print_table(sw_table.table)
 
-    print ('score: {}'.format(sw_table.score))
-    utils.print_alignment(sw_table.aligned1, sw_table.aligned2)
+    print('Score: {}'.format(sw_table.score))
+    print('Local alignment:')
+    utils.print_alignment(sw_table.alignment_1, sw_table.alignment_2)
 
 
 if __name__ == "__main__":
