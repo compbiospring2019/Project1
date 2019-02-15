@@ -26,4 +26,12 @@ def test_backtrack():
     print(test_table.aligned1)
     print(test_table.aligned2)
 
-test_backtrack()
+def test_score():
+    test_table = dp_table.DPTable("GCCCT", "GCGCA")
+    test_table.build_table()
+    test_table.base_cases()
+    test_table.fill_matrix()
+    test_table.get_score()
+    print(test_table.score)
+
+test_score()

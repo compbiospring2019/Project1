@@ -86,6 +86,11 @@ class DPTable(object):
         self.aligned1 = self.aligned1[::-1]
         self.aligned2 = self.aligned2[::-1]
 
+    def get_score(self):
+        n = len(self.seq_1)
+        m = len(self.seq_2)
+        self.score = self.table[n][m].value
+
 class Cell(object):
     value = 0
     previous = (0, 0)
