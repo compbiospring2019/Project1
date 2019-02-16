@@ -34,7 +34,7 @@ def main():
     nw_table.calculate_alignment()
     # utils.print_table(nw_table.table)
 
-    print ('score: {}'.format(nw_table.score))
+    print ('Score: {}'.format(nw_table.score))
     utils.print_alignment(nw_table.aligned1, nw_table.aligned2)
 
     # Calculate and display Smith-Waterman
